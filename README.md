@@ -13,11 +13,12 @@ La preparación del sistema se realizó a través de Windows PowerShell:
 1. **Habilitación de WSL:** Uso del comando `wsl --install`.
 2. **Cambio de Versión:** Configuración a versión 1 mediante:
    `wsl --set-default-version 1`
-3. **Instalación de la Distribución:** Configuración de **Ubuntu** desde la Microsoft Store.
+3. **Instalación de Ubuntu:** Configuración de **Ubuntu** desde la Microsoft Store.
 
 ### Configuración Global de Git
 
-- **Identidad:**  `git config --global user.name "Usuario-GitHub"`
+- **Identidad:**  
+    - `git config --global user.name "Usuario-GitHub"`
     - `git config --global user.email "tu-correo@ejemplo.com"`
 - **Rama por Defecto:** Establecimiento de `main` como rama inicial:
     `git config --global init.defaultBranch main`
@@ -72,6 +73,7 @@ Se implementó un flujo lineal para asegurar la estabilidad del proyecto:
 5. **Fusionar:** Merge a la rama `main` y eliminación de la rama temporal.
 
 ### Diagrama del Flujo (Mermaid)
+
 [visualizador de diagramas de mermaid](https://mermaid.live/edit#pako:eNpVkc1ugzAQhF_F2lMrkYifgIkPlRrS5pKqPeQUyMEKG4wSbGSM0hR49xqiqu2edjTzzR62g6PKERicLup6FFwbsltnkth5ThOhy8ZUvDmQ2eyp36AhlZJ468nqYaNII1Rdl7J4vOdXY4gk3XaMITGilOfhbiUT_y6xJ-t0y2uj6sNfZ3dVPXlJyw9h6_87QqOlXtMTZyc-O3JNEq4P4EChyxyY0S06UKGu-CihG-EMjMAKM2B2zbk-Z5DJwTI1l3ulqh9Mq7YQYHsvjVVtnXOD65IXmv9GUOaoE9VKA8xbBlMHsA4-rYyX88Dz4iCI6IKGNPIduAHz4_kioIs4DELXX0Z-RAcHvqaz7jymoWvHj1xKXT_0HMC8NEq_3b8wPWP4Bi_ue5I)
 
 ```mermaid
