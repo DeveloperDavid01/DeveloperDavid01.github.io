@@ -2,6 +2,10 @@
 
 **Autor:** David Francisco Sanchez
 
+## ¿Qué es?
+
+Git y GitHub, en conjunto; son Software de control de versiones, guarda los cambios que haces en los archivos y te permite cordinar los cambios que haces con otras personas (facilita el trabajo en equipo).
+
 ## 1. Configuración del Entorno y Fundamentos
 
 El desarrollo se realizó preparando un entorno Linux nativo dentro de Windows para garantizar la compatibilidad con las herramientas de Git.
