@@ -72,6 +72,7 @@ Se implementó un flujo lineal para asegurar la estabilidad del proyecto:
 5. **Fusionar:** Merge a la rama `main` y eliminación de la rama temporal.
 
 ### Diagrama del Flujo (Mermaid)
+[visualizador de diagramas de mermaid](https://mermaid.live/edit#pako:eNpVkc1ugzAQhF_F2lMrkYifgIkPlRrS5pKqPeQUyMEKG4wSbGSM0hR49xqiqu2edjTzzR62g6PKERicLup6FFwbsltnkth5ThOhy8ZUvDmQ2eyp36AhlZJ468nqYaNII1Rdl7J4vOdXY4gk3XaMITGilOfhbiUT_y6xJ-t0y2uj6sNfZ3dVPXlJyw9h6_87QqOlXtMTZyc-O3JNEq4P4EChyxyY0S06UKGu-CihG-EMjMAKM2B2zbk-Z5DJwTI1l3ulqh9Mq7YQYHsvjVVtnXOD65IXmv9GUOaoE9VKA8xbBlMHsA4-rYyX88Dz4iCI6IKGNPIduAHz4_kioIs4DELXX0Z-RAcHvqaz7jymoWvHj1xKXT_0HMC8NEq_3b8wPWP4Bi_ue5I)
 
 ```mermaid
 graph LR
