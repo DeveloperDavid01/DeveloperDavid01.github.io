@@ -29,6 +29,30 @@ La preparación del sistema se realizó a través de Windows PowerShell:
 - **Comandos de Terminal (Ubuntu):** Gestión con `ls`, `cd`, `mkdir` y `pwd`.
 - **Integración con IDE:** Apertura de Visual Studio Code con `code .`.
 
+- ### Clonar repositorio
+
+#### HTTPS
+Es el método más **versátil**. Solo requiere la URL del repositorio para realizar la descarga. Su principal ventaja es que es compatible con cualquier red y no requiere configuración previa en el sistema operativo, lo que lo hace ideal para una configuración rápida y funcional.
+
+#### SSH
+Es el método más **cómodo** y profesional. Tras una configuración inicial, permite la comunicación con GitHub de forma automática sin solicitar usuario ni contraseña en cada sesión. Utiliza llaves criptográficas para validar la identidad del desarrollador.
+
+**Pasos de configuración:**
+1. **Generar la llave:** `ssh-keygen -t ed25519 -C "tu-correo@ejemplo.com"`
+2. **Encender el agente de SSH:** `eval "$(ssh-agent -s)"`
+3. **Añadir la llave privada al agente:** `ssh-add ~/.ssh/id_ed25519`
+4. **Probar la conexión con GitHub:** `ssh -T git@github.com`
+
+#### GitHub CLI (gh)
+Es la herramienta de línea de comandos que integra las funciones de la web de GitHub en la terminal. Permite gestionar repositorios, pull requests e issues de forma eficiente.
+
+**Instalación:**
+Para utilizar esta herramienta, primero debe ser instalada en el sistema. Los comandos de instalación varían según el sistema operativo y se pueden encontrar en el repositorio oficial: [GitHub CLI Installation Guide](https://github.com/cli/cli?tab=readme-ov-file#installation).
+
+**Configuración:**
+- Comando: `gh auth login`
+- Sigue los pasos en consola para elegir HTTPS o SSH y vincular tu cuenta mediante el navegador o un token de acceso.
+
 ## 2. El Ciclo de Vida del Archivo y Áreas de Trabajo
 
 Git gestiona los cambios a través de zonas lógicas que permiten un control total antes de la persistencia:
