@@ -77,7 +77,7 @@ Git gestiona los cambios a través de zonas lógicas que permiten un control tot
 - **Configuración de Pull (Estrategias):**
     - `git config pull.rebase false`: Fusión estándar (Merge commit).
     - `git config pull.rebase true`: Reorganización del historial (Rebase).
-    - `git config pull.ff`: Configuración de avance rápido (Fast-forward).
+    - `git config pull.ff only`: Configuración de avance rápido (Fast-forward).
 - **Estados de Reset:**
     - `--soft`: Mantiene cambios en Staging.
     - `--mixed`: Mantiene cambios en el directorio de trabajo.
