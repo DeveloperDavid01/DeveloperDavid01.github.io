@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Mis Certificados - Platzi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-
 <body>
 
     <div class="container py-4">
@@ -23,49 +20,131 @@
                 Mis Certificados en Platzi
             </h1>
             
-            <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="custom-card">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=400" alt="Certificado Git" class="certificate-img">
-                        <div class="p-3">
-                            <h2 class="h5 font-weight-bold mb-1">Curso Profesional de Git y GitHub</h2>
-                            <span class="badge badge-intermedio mb-2">Nivel: Intermedio</span>
-                            
-                            <div class="small text-white-50 mb-2">
-                                <div> <strong>Clases:</strong> 24 clases</div>
-                                <div> <strong>Horas de contenido:</strong> 5h de video</div>
-                                <div> <strong>Horas de práctica:</strong> 8h estimadas</div>
-                            </div>
-                            
-                            <p class="small text-light mb-0">
-                                Dominio del ciclo de vida de archivos, control de versiones local, gestión de ramas, fusiones y entornos colaborativos en GitHub.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="custom-card">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400" alt="Certificado PHP" class="certificate-img">
-                        <div class="p-3">
-                            <h2 class="h5 font-weight-bold mb-1">Curso de Introducción a PHP</h2>
-                            <span class="badge badge-basico mb-2">Nivel: Básico</span>
-                            
-                            <div class="small text-white-50 mb-2">
-                                <div> <strong>Clases:</strong> 18 clases</div>
-                                <div> <strong>Horas de contenido:</strong> 4h de video</div>
-                                <div> <strong>Horas de práctica:</strong> 6h estimadas</div>
-                            </div>
-                            
-                            <p class="small text-light mb-0">
-                                Fundamentos del lenguaje del lado del servidor, manejo de variables, condicionales, arreglos y funciones básicas.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row" id="contenedor-certificados"></div>
         </section>
     </div>
+
+    <script>
+        const certificados = [
+            {
+                titulo: "Curso para Aprender en Línea Efectivamente",
+                nivel: "Básico", // Puede ser: basico, intermedio, avanzado
+                clases: 11,
+                horasContenido: 2,
+                horasPractica: 6,
+                descripcion: "Mejora tus habilidades de estudio en línea. Identifica y rompe mitos del aprendizaje, crea métodos efectivos, organiza tu tiempo y mejora la retención de información con prácticas como la memorización y el uso ético de la IA. Aplicable a cualquier área.",
+                imagen: "../assets/img/certificados/aprender-en-linea-efectivamente.jpg"
+            },
+            {
+                titulo: "Curso de Gestión Efectiva del Tiempo",
+                nivel: "Básico", // 
+                clases: 16,
+                horasContenido: 1,
+                horasPractica: 8,
+                descripcion: "Aprende a priorizar tareas, vencer la procrastinación y usa la IA para planificar proyectos en minutos. Crea hábitos sólidos, define metas SMART y organiza tu flujo de trabajo con Bullet Journal. Descubre cómo integrar la IA como asistente digital y transforma tus tareas en progreso real.",
+                imagen: "../assets/img/certificados/gestion-tiempo.jpg"
+            },
+            {
+                titulo: "Curso Básico de PHP: Instalación, Fundamentos y Operadores",
+                nivel: "Básico", 
+                clases: 23,
+                horasContenido: 4,
+                horasPractica: 14,
+                descripcion: "Instala PHP y convierte segundos en horas, minutos y segundos. Entiende la sintaxis, variables y constantes de PHP. Aprende operadores lógicos, aritméticos y relacionales. Realiza cálculos matemáticos y utilízalos en tu código PHP.",
+                imagen: "../assets/img/certificados/php.jpg"
+            },
+            {
+                titulo: "Curso de Git y GitHub",
+                nivel: "Básico", 
+                clases: 42,
+                horasContenido: 6,
+                horasPractica: 18,
+                descripcion: "Gestiona versiones, colabora en equipo y publica proyectos usando Git y GitHub. Controla ramas, pull requests, releases, seguridad y automatizaciones con herramientas clave de la industria.",
+                imagen: "../assets/img/certificados/git-github.jpg"
+            },
+            {
+                titulo: "Curso de PHP: Arreglos, Funciones y Estructuras de Control",
+                nivel: "Básico", 
+                clases: 25,
+                horasContenido: 4,
+                horasPractica: 16,
+                descripcion: "Explora PHP creando un juego del ahorcado. Descubre cómo trabajar con arreglos, condicionales y ciclos para controlar el flujo del juego. Implementa funciones y plantillas para gestionar el código de forma eficiente.",
+                imagen: "../assets/img/certificados/php-arreglos.jpg"
+            },
+            {
+                titulo: "Curso de Fundamentos de PHP",
+                nivel: "Básico", 
+                clases: 23,
+                horasContenido: 2,
+                horasPractica: 6,
+                descripcion: "Aprende a desarrollar aplicaciones web dinámicas con PHP. Desde la instalación del entorno hasta la creación de formularios y gestión de sesiones, construirás una app de registro y login aplicando buenas prácticas. Dominarás la sintaxis básica, el uso de variables, arreglos, funciones y la integración con HTML. Este curso te prepara para avanzar hacia la programación orientada a objetos, bases de datos y APIs.",
+                imagen: "../assets/img/certificados/php-fundamentos.jpg"
+            },
+            {
+                titulo: "Curso de PHP con Composer",
+                nivel: "Básico",
+                clases: 19,
+                horasContenido: 2,
+                horasPractica: 4,
+                descripcion: "Desarrolla aplicaciones web profesionales en PHP utilizando Composer para gestionar dependencias y automatizar cargas. Aprende a crear estructuras de código eficiente y mantén tus proyectos organizados y modulares.",
+                imagen: "../assets/img/certificados/php-composer.jpg"
+            },
+            {
+                titulo: "Curso de PHP con Laravel",
+                nivel: "Básico", 
+                clases: 25,
+                horasContenido: 3,
+                horasPractica: 16,
+                descripcion: "¡Con Platzi, desarrollar aplicaciones web a la medida de tus necesidades es pan comido! Aprovecha todas las bondades de Laravel. Descubre con este framework PHP las ventajas de tener una increíble comunidad de apoyo y sé el mejor artesano de desarrollo que ha pisado la tierra.",
+                imagen: "../assets/img/certificados/php-laravel.jpg"
+            },
+            {
+                titulo: "Curso de Introducción a Laravel 6",
+                nivel: "Básico", 
+                clases: 37,
+                horasContenido: 5,
+                horasPractica: 10,
+                descripcion: "Crea un blog desde cero con Laravel usando TDD. Aprende a gestionar contenido, validar datos, y proteger tu API con autenticación de token. Configura rutas, controladores y vistas utilizando el sistema de plantillas Blade.",
+                imagen: "../assets/img/certificados/laravel-introduccion.jpg"
+            },
+            {
+                titulo: "Curso de API REST con Laravel",
+                nivel: "Avanzado",
+                clases: 18,
+                horasContenido: 2,
+                horasPractica: 8,
+                descripcion: "Construye APIs REST profesionales con Laravel, aprendiendo desde la estructura básica y planificación hasta la autenticación con tokens en APIs privadas. Configura y personaliza recursos, colecciones y maneja versiones eficientemente.",
+                imagen: "../assets/img/certificados/api-rest-laravel.jpg"
+            },
+        ];
+
+        // 2. El "Método" que genera la estructura HTML de forma dinámica
+        function crearTarjetaCertificado(cert) {
+            return `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="custom-card">
+                        <img src="${cert.imagen}" alt="${cert.titulo}" class="certificate-img">
+                        <div class="p-3">
+                            <h2 class="h5 font-weight-bold mb-1">${cert.titulo}</h2>
+                            <span class="badge badge-${cert.nivel} mb-2">Nivel: ${cert.nivel.charAt(0).toUpperCase() + cert.nivel.slice(1)}</span>
+                            
+                            <div class="small text-white-50 mb-2">
+                                <div> <strong>Clases:</strong> ${cert.clases} clases</div>
+                                <div> <strong>Horas de contenido:</strong> ${cert.horasContenido}h de video</div>
+                                <div> <strong>Horas de práctica:</strong> ${cert.horasPractica}h estimadas</div>
+                            </div>
+                            
+                            <p class="small text-light mb-0">${cert.descripcion}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 3. Inyectar las tarjetas en el HTML al cargar la página
+        const contenedor = document.getElementById('contenedor-certificados');
+        contenedor.innerHTML = certificados.map(c => crearTarjetaCertificado(c)).join('');
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
