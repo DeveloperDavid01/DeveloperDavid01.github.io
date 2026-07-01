@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Mi Ruta de Aprendizaje</title>
+    <title>Sobre Mí y Proyectos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 4px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+        .tech-badge:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        .project-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #fff !important;
+        }
+        .glass-modal .modal-header, .glass-modal .modal-footer {
+            border: none;
+        }
+    </style>
 </head>
-
 <body>
 
     <div class="container py-4">
@@ -18,46 +50,106 @@
             <a href="../index.html" class="btn btn-outline-light btn-sm">Volver al Inicio</a>
         </div>
 
+        <!-- SECCIÓN 1: PERFIL Y HABILIDADES -->
+        <section class="glass-section mb-4">
+            <div class="row align-items-center p-3">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <h1 class="h3 font-weight-bold mb-3 text-white">Sobre Mí</h1>
+                    <p class="text-light" style="line-height: 1.6; font-size: 0.95rem;">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+                <div class="col-lg-5">
+                    <h2 class="h5 font-weight-bold mb-3 text-white-50">Stack Tecnológico</h2>
+                    <div class="d-flex flex-wrap">
+                        <span class="tech-badge">Tecnología 1</span>
+                        <span class="tech-badge">Tecnología 2</span>
+                        <span class="tech-badge">Tecnología 3</span>
+                        <span class="tech-badge">Tecnología 4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PROYECTOS -->
         <section class="glass-section">
-            <h1 class="h4 font-weight-bold mb-4 text-center border-bottom pb-2" style="position: static; color: #fff;">
-                Mi Ruta de Aprendizaje (Cursos Realizados)
-            </h1>
+            <h2 class="h4 font-weight-bold mb-4 text-center border-bottom pb-2 text-white" style="position: static;">
+                Mis Proyectos y Laboratorio
+            </h2>
             
-            <ol class="ruta-lista">
-                <li class="ruta-item">
-                    <div class="media align-items-center">
-                        <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=100" class="mr-3 ruta-thumb" alt="Curso Prework">
-                        <div class="media-body">
-                            <h2 class="h6 font-weight-bold mb-0 text-white">1. Curso de Prework: Configuración de Entorno de Desarrollo en Linux</h2>
-                            <small class="text-white-50">Completado como pilar fundamental para el desarrollo backend nativo.</small>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="ruta-item">
-                    <div class="media align-items-center">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=100" class="mr-3 ruta-thumb" alt="Curso Git">
-                        <div class="media-body">
-                            <h2 class="h6 font-weight-bold mb-0 text-white">2. Curso Profesional de Git y GitHub</h2>
-                            <small class="text-white-50">Control de versiones avanzado y flujos de trabajo colaborativos.</small>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="ruta-item">
-                    <div class="media align-items-center">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=100" class="mr-3 ruta-thumb" alt="Curso PHP">
-                        <div class="media-body">
-                            <h2 class="h6 font-weight-bold mb-0 text-white">3. Curso de Fundamentos de PHP y Estructuras de Control</h2>
-                            <small class="text-white-50">Lógica básica en backend y maquetación de arquitecturas web.</small>
-                        </div>
-                    </div>
-                </li>
-            </ol>
+            <div class="row" id="contenedor-proyectos"></div>
         </section>
     </div>
 
+    <!-- MODAL DINÁMICO PARA PROYECTOS -->
+    <div class="modal fade" id="proyectoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content glass-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold" id="modalTitulo"></h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <span class="badge badge-info" id="modalTipo"></span>
+                    </div>
+                    <p class="text-light mb-4" id="modalDescripcion" style="font-size: 0.95rem; line-height: 1.6;"></p>
+                    <div class="small text-white-50 border-top pt-3" id="modalTecnologias"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const proyectos = [
+            {
+                titulo: "Proyecto Relleno 1",
+                tipo: "Tipo Relleno 1",
+                descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                tecnologias: "X • Y • Z"
+            },
+            {
+                titulo: "Proyecto Relleno 2",
+                tipo: "Tipo Relleno 2",
+                descripcion: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                tecnologias: "A • B • C"
+            }
+        ];
+
+        function crearTarjetaProyecto(proy, index) {
+            return `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="custom-card project-card" onclick="abrirDetalleProyecto(${index})">
+                        <div class="p-3">
+                            <span class="text-white-50 small font-weight-bold d-block mb-1 text-uppercase">${proy.tipo}</span>
+                            <h3 class="h5 font-weight-bold text-white mb-2">${proy.titulo}</h3>
+                            <p class="small text-light mb-0 text-truncate">${proy.descripcion}</p>
+                            <span class="badge badge-light mt-3 btn-sm" style="font-size:0.75rem;">Ver detalles →</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function abrirDetalleProyecto(index) {
+            const proy = proyectos[index];
+            
+            document.getElementById('modalTitulo').innerText = proy.titulo;
+            document.getElementById('modalTipo').innerText = proy.tipo;
+            document.getElementById('modalDescripcion').innerText = proy.descripcion;
+            document.getElementById('modalTecnologias').innerHTML = `⚙️ <strong>Relleno:</strong> <br>${proy.tecnologias}`;
+            
+            $('#proyectoModal').modal('show');
+        }
+
+        const contenedor = document.getElementById('contenedor-proyectos');
+        contenedor.innerHTML = proyectos.map((p, index) => crearTarjetaProyecto(p, index)).join('');
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
