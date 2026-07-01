@@ -7,6 +7,39 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Estilos interactivos para las tarjetas minimalistas */
+        .interactive-card {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        /* Ajuste de badges dinámicos */
+        .badge-Básico { background-color: #28a745; color: white; }
+        .badge-Avanzado { background-color: #dc3545; color: white; }
+        .badge-Intermedio { background-color: #fd7e14; color: white; }
+        
+        /* Modal estilizado con estética de cristal */
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #fff !important;
+        }
+        .glass-modal .modal-header, .glass-modal .modal-footer {
+            border: none;
+        }
+        .modal-cert-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 1.5px;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,11 +57,36 @@
         </section>
     </div>
 
+    <div class="modal fade" id="certificadoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content glass-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold" id="modalTitulo"></h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <img src="" id="modalImagen" alt="Certificado" class="modal-cert-img">
+                        </div>
+                        <div class="col-md-6">
+                            <span class="badge mb-3" id="modalBadge"></span>
+                            <div class="small text-white-50 mb-3" id="modalDetalles"></div>
+                            <p class="text-light" id="modalDescripcion" style="font-size: 0.95rem; line-height: 1.5;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const certificados = [
             {
                 titulo: "Curso para Aprender en Línea Efectivamente",
-                nivel: "Básico", // Puede ser: basico, intermedio, avanzado
+                nivel: "Básico",
                 clases: 11,
                 horasContenido: 2,
                 horasPractica: 6,
@@ -37,7 +95,7 @@
             },
             {
                 titulo: "Curso de Gestión Efectiva del Tiempo",
-                nivel: "Básico", // 
+                nivel: "Básico",
                 clases: 16,
                 horasContenido: 1,
                 horasPractica: 8,
@@ -115,38 +173,59 @@
                 horasPractica: 8,
                 descripcion: "Construye APIs REST profesionales con Laravel, aprendiendo desde la estructura básica y planificación hasta la autenticación con tokens en APIs privadas. Configura y personaliza recursos, colecciones y maneja versiones eficientemente.",
                 imagen: "../assets/img/certificados/apirest-laravel.jpg"
-            },
+            }
         ];
 
-        // 2. El "Método" que genera la estructura HTML de forma dinámica
-        function crearTarjetaCertificado(cert) {
+        // 2. Método optimizado: Renderiza las tarjetas sin la imagen ni la descripción pesada
+        function crearTarjetaCertificado(cert, index) {
             return `
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="custom-card">
-                        <img src="${cert.imagen}" alt="${cert.titulo}" class="certificate-img">
+                    <div class="custom-card interactive-card" onclick="abrirDetalleCertificado(${index})">
                         <div class="p-3">
-                            <h2 class="h5 font-weight-bold mb-1">${cert.titulo}</h2>
-                            <span class="badge badge-${cert.nivel} mb-2">Nivel: ${cert.nivel.charAt(0).toUpperCase() + cert.nivel.slice(1)}</span>
+                            <h2 class="h5 font-weight-bold mb-1" style="min-height: 48px; display: flex; align-items: center;">${cert.titulo}</h2>
+                            <span class="badge badge-${cert.nivel} mb-3">Nivel: ${cert.nivel}</span>
                             
-                            <div class="small text-white-50 mb-2">
-                                <div> <strong>Clases:</strong> ${cert.clases} clases</div>
-                                <div> <strong>Horas de contenido:</strong> ${cert.horasContenido}h de video</div>
+                            <div class="small text-white-50 mb-0">
+                                <div class="mb-1"> <strong>Clases:</strong> ${cert.clases} clases</div>
+                                <div class="mb-1"> <strong>Horas de contenido:</strong> ${cert.horasContenido}h de video</div>
                                 <div> <strong>Horas de práctica:</strong> ${cert.horasPractica}h estimadas</div>
                             </div>
-                            
-                            <p class="small text-light mb-0">${cert.descripcion}</p>
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // 3. Inyectar las tarjetas en el HTML al cargar la página
+        // 3. Método interactivo: Captura los datos completos del objeto seleccionado e inyecta la información al Modal
+        function abrirDetalleCertificado(index) {
+            const cert = certificados[index];
+            
+            document.getElementById('modalTitulo').innerText = cert.titulo;
+            document.getElementById('modalImagen').src = cert.imagen;
+            document.getElementById('modalImagen').alt = `Certificado de ${cert.titulo}`;
+            document.getElementById('modalDescripcion').innerText = cert.descripcion;
+            
+            const badge = document.getElementById('modalBadge');
+            badge.className = `badge badge-${cert.nivel}`;
+            badge.innerText = `Nivel: ${cert.nivel}`;
+            
+            document.getElementById('modalDetalles').innerHTML = `
+                <div> <strong>Clases:</strong> ${cert.clases} clases</div>
+                <div> <strong>Horas de contenido:</strong> ${cert.horasContenido}h de video</div>
+                <div> <strong>Horas de práctica:</strong> ${cert.horasPractica}h estimadas</div>
+            `;
+            
+            // Activar el modal usando el script nativo de Bootstrap
+            $('#certificadoModal').modal('show');
+        }
+
+        // 4. Inyección inicial en el HTML
         const contenedor = document.getElementById('contenedor-certificados');
-        contenedor.innerHTML = certificados.map(c => crearTarjetaCertificado(c)).join('');
+        contenedor.innerHTML = certificados.map((c, index) => crearTarjetaCertificado(c, index)).join('');
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
